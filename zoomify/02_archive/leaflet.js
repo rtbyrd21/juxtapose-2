@@ -8182,7 +8182,7 @@ L.Control.Zoom = L.Control.extend({
 	_zoomLevel: 0,
 
 	_zoomIn: function (e) {
-		parent.$('body').trigger('zoomIn');
+		// parent.$('body').trigger('zoomIn');
 		this._map.zoomIn(e.shiftKey ? 3 : 1);
 		
 		this._zoomLevel++;
@@ -8193,7 +8193,7 @@ L.Control.Zoom = L.Control.extend({
 	_zoomOut: function (e) {
 		if(this._zoomLevel > 0){
 			
-			parent.$('body').trigger('zoomOut');
+			// parent.$('body').trigger('zoomOut');
 			this._map.zoomOut(e.shiftKey ? 3 : 1);
 			this._zoomLevel--;
 			// console.log(this._zoomLevel);
@@ -8209,7 +8209,7 @@ L.Control.Zoom = L.Control.extend({
 		var stop = L.DomEvent.stopPropagation;
 		// var zoomBroadcast = parent.$('body').trigger('zoom');
 		var zoomBroadcast = function(type){
-			parent.$('body').trigger('zoomClicked', {'className': className});
+			// parent.$('body').trigger('zoomClicked', {'className': className});
 		};
 
 		// parent.$('body').on('zoom', function(e, data){

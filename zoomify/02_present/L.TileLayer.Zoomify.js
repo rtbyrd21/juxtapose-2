@@ -1,6 +1,6 @@
-/*
- * L.TileLayer.Zoomify display Zoomify tiles with Leaflet
- */
+
+ // * L.TileLayer.Zoomify display Zoomify tiles with Leaflet
+ 
 
 L.TileLayer.Zoomify = L.TileLayer.extend({
 	options: {

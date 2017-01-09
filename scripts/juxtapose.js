@@ -213,7 +213,6 @@
       var relativeX = pageX - offset.left;
       leftPercent = (relativeX / width) * 100;
     }
-    console.log(leftPercent);
     return leftPercent;
   }
 

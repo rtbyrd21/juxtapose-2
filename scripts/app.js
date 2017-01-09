@@ -45,10 +45,10 @@ setTimeout(function(){
 		  hit = false;
 		  
 
-		  var myRectParams = [[49.5, 44, 5, 6], [44,31,5.5,5], [36.5, 41, 6.5, 6], [41, 50, 8, 7], [65, 77, 6, 6.5]]
+		  var myRectParams = [[44,31,5.5,5], [49.5, 44, 5, 6], [41, 50, 8, 7], [36.5, 41, 6.5, 6], [65, 77, 6, 6.5]]
 		  for(var i=0; i<myRectParams.length; i++){
 		  	 hitTracker[i] = false;
-		  	 myRects[i] = new hitTarget(myRectParams[i][0], myRectParams[i][1], myRectParams[i][2], myRectParams[i][3]);
+		  	 myRects[i] = new hitTarget(myRectParams[i][0], myRectParams[i][1], myRectParams[i][2], myRectParams[i][3], i);
 		  }
 
 		  
@@ -86,7 +86,7 @@ setTimeout(function(){
 			});
 		}
 
-		function hitTarget(x, y, width, height){
+		function hitTarget(x, y, width, height, index){
 			this.xPos = p.map(x, 0, 100, 0, p.windowWidth);
 			this.yPos = p.map(y, 0, 100, 0, (p.windowWidth / 16) * 9);
 			this.percWidth = p.map(width, 0, 100, 0, p.windowWidth);
@@ -107,6 +107,8 @@ setTimeout(function(){
 				p.fill(255,255,255,100);
 				// console.log(this.xPos,this.yPos,this.width,this.height);
 				p.rect(this.xPos,this.yPos,this.percWidth,this.percHeight);
+				p.fill(0);
+				p.text(index + 1, this.xPos + (this.percWidth/2), this.yPos + (this.percHeight/2));
 			}
 		}
 

@@ -75,7 +75,7 @@
 	}
 .leaflet-top {
 	/*top: 0;*/
-	bottom:25px;
+	/*bottom:25px;*/
 	}
 .leaflet-right {
 	right: 0;
@@ -259,12 +259,15 @@
 	}
 .leaflet-control-zoom-out {
 	font: bold 23px/20px Tahoma, Verdana, sans-serif;
+    
+  
 	}
 .leaflet-control-zoom a.leaflet-control-zoom-disabled {
 	cursor: default;
 	background-color: rgba(255, 255, 255, 0.8);
 	color: #bbb;
 	}
+
 
 .leaflet-touch .leaflet-control-zoom a {
 	width: 30px;

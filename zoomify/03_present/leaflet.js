@@ -15,6 +15,11 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
 var oldL = window.L,
     L = {};
 
+setTimeout(function(){
+	 $('.leaflet-control-zoom-out').css({'color' : 'rgba(0,0,0,.25)'});
+	},150);
+   
+
 function setIntervalX(callback, delay, repetitions) {
 		    var x = 0;
 		    var intervalID = window.setInterval(function () {
@@ -239,6 +244,7 @@ L.setOptions = L.Util.setOptions;
 L.Class = function () {};
 
 L.Class.extend = function (props) {
+
 
 	// extended class with the new prototype
 	var NewClass = function () {
@@ -1653,16 +1659,16 @@ L.Map = L.Class.extend({
 		parent.$('body').on('zoomHasEnded', function(e, data){
 				setIntervalX(function () {
 					parent.$('body').trigger('panningPres');
-				}, 200, 4);
+				}, 150, 4);
 				
 			});
 
 
-		parent.$('body').on('zoomClicked', function(e, data){
-			$($('.' + data.className)[0])[0].click();
+		// parent.$('body').on('zoomClicked', function(e, data){
+		// 	$($('.' + data.className)[0])[0].click();
 				
 			
-		});
+		// });
 
 		var initialOffset = $(parent.$('body').find('.jx-image.jx-right')).width();
 
@@ -8204,24 +8210,53 @@ L.Control.Zoom = L.Control.extend({
 		map.off('zoomend zoomlevelschange', this._updateDisabled, this);
 	},
 
-	_zoomLevel: 0,
+	// _zoomLevel: 0,
+	_buttonCount: 0,
 
 	_zoomIn: function (e) {
-		parent.$('body').trigger('zoomIn');
-		this._map.zoomIn(e.shiftKey ? 3 : 1);
-		
-		this._zoomLevel++;
+		// parent.$('body').trigger('zoomIn');
+		if(this._buttonCount < 3){
+			this._map.zoomIn(e.shiftKey ? 3 : 1);	
+			this._buttonCount++;
 
+			if(this._buttonCount === 3){
+				$('.leaflet-control-zoom-in').css({'color' : 'rgba(0,0,0,.25)'});
+			}else{
+				$('.leaflet-control-zoom-in').css({'color' : 'rgba(0,0,0,1)'});
+			}
+			
+			if(this._buttonCount === 0){
+				$('.leaflet-control-zoom-out').css({'color' : 'rgba(0,0,0,.25)'});
+			}else{
+				$('.leaflet-control-zoom-out').css({'color' : 'rgba(0,0,0,1)'});
+			}
+			
+		}
 	},
 
 	_zoomOut: function (e) {
-		if(this._zoomLevel > 0){
+		if(this._buttonCount > 0){
 			
-			parent.$('body').trigger('zoomOut');
+			// parent.$('body').trigger('zoomOut');
 			this._map.zoomOut(e.shiftKey ? 3 : 1);
-			this._zoomLevel--;
+			this._buttonCount--;
+
+			if(this._buttonCount === 3){
+				$('.leaflet-control-zoom-in').css({'color' : 'rgba(0,0,0,.25)'});
+			}else{
+				$('.leaflet-control-zoom-in').css({'color' : 'rgba(0,0,0,1)'});
+			}
+			
+			if(this._buttonCount === 0){
+				$('.leaflet-control-zoom-out').css({'color' : 'rgba(0,0,0,.25)'});
+			}else{
+				$('.leaflet-control-zoom-out').css({'color' : 'rgba(0,0,0,1)'});
+			}
+			
 		}
 	},
+
+	
 
 	_createButton: function (html, title, className, container, fn, context) {
 		var link = L.DomUtil.create('a', className, container);
@@ -8231,8 +8266,26 @@ L.Control.Zoom = L.Control.extend({
 
 		var stop = L.DomEvent.stopPropagation;
 		// var zoomBroadcast = parent.$('body').trigger('zoom');
+		var that = this;
 		var zoomBroadcast = function(type){
-			parent.$('body').trigger('zoomClicked', {'className': className});
+
+			
+
+			// if(className === 'leaflet-control-zoom-in'){
+			// 	if(that._buttonCount < 3){
+			// 		parent.$('body').trigger('zoomClicked', {'className': className});
+			// 		// that._buttonCount++;
+			// 	}
+				
+			// }else{
+			// 	if(that._buttonCount > 0){
+			// 		parent.$('body').trigger('zoomClicked', {'className': className});
+			// 		// that._buttonCount--;
+			// 	}
+			// }
+
+			
+			console.log(that._buttonCount);
 		};
 
 		// parent.$('body').on('zoom', function(e, data){
